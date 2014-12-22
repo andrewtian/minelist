@@ -158,24 +158,24 @@ func readPong(rd io.Reader) (*Pong, error) {
 	pl := make([]byte, nl)
 	_, err = io.ReadFull(r, pl)
 	if err != nil {
-		return nil, errors.New("could not read")
+		return nil, errors.New("could not read length given by length header")
 	}
 
 	// packet id
 	_, n := binary.Uvarint(pl)
 	if n <= 0 {
-		return nil, errors.New("incorrect")
+		return nil, errors.New("could not read packet id")
 	}
 
 	// string varint
 	_, n2 := binary.Uvarint(pl[n:])
 	if n2 <= 0 {
-		return nil, errors.New("incorrect")
+		return nil, errors.New("could not read string varint")
 	}
 
 	var pong Pong
 	if err := json.Unmarshal(pl[n+n2:], &pong); err != nil {
-		return nil, err
+		return nil, errors.New("could not read pong json")
 	}
 
 	return &pong, nil
