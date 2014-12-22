@@ -6,6 +6,7 @@ import (
 	"encoding/binary"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io"
 	"net"
 	"strconv"
@@ -25,10 +26,8 @@ type Pong struct {
 		Online int `json:"online"`
 		Sample []map[string]string
 	} `json:"players"`
-	Description struct {
-		Text string `json:"text"`
-	} `json:"description"`
-	FavIcon string `json:"favicon"`
+	Description interface{} `json:"description"`
+	FavIcon     string      `json:"favicon"`
 }
 
 type Server struct {

@@ -7,7 +7,7 @@ import (
 )
 
 var servers = map[string]string{
-	"desteria": "pvp.desteria.com:25565",
+	"desteria": "Play.NirvanaMC.com:25565",
 	"gotpvp":   "play.gotpvp.com:25565",
 }
 
