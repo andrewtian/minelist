@@ -1,0 +1,20 @@
+{{ define "base" }}
+<html>
+<head>
+    <link rel="stylesheet" href="/static/css/style.css">
+    {{template "title" . }}
+</head>
+<body>
+    <header>
+        <h1>Minelist</h1>
+        <nav>
+            <a href="/track">Track</a>
+            <a href="/about">About</a>
+        </nav>
+    </header>
+    <div id="page">
+    {{ template "content" . }}
+    </div>
+</body>
+</html>
+{{ end }}

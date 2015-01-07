@@ -1,33 +1,35 @@
 package main
 
 import (
-	"fmt"
 	"github.com/gorilla/mux"
-	"github.com/andrewtian/minepong"
+	_ "github.com/lib/pq"
+	"html/template"
 	"log"
 	"net/http"
+	"os"
 )
+
+var templates = make(map[string]*template.Template)
+
+func init() {
+	templates["list.html"] = template.Must(template.ParseFiles("templates/list.tmpl", "templates/layout.tmpl"))
+	templates["lisdt.html"] = template.Must(template.ParseFiles("templates/list.tmpl", "templates/layout.tmpl"))
+	templates["about.html"] = template.Must(template.ParseFiles("templates/about.tmpl", "templates/layout.tmpl"))
+}
 
 func main() {
 	r := mux.NewRouter()
-	r.HandleFunc("/", HomeHandler)
+	r.HandleFunc("/", ListHandler)
+	r.HandleFunc("/test", TestHandler)
+	r.HandleFunc("/about", AboutHandler)
+
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	http.Handle("/", r)
 
-	log.Fatalln(http.ListenAndServe(":8040", r))
-}
-
-func HomeHandler(w http.ResponseWriter, r *http.Request) {
-	s := minepong.NewServer("desrtia", "pvp.desteria.com:25565")
-	if err := s.Connect(); err != nil {
-		fmt.Fprintln(w, "couldnt connect to server")
-		return
+	port := os.Getenv("PORT")
+	if len(port) == 0 {
+		port = "3000"
 	}
 
-	pong, err := s.Ping()
-	if err != nil {
-		fmt.Println(w, "there was an error pinging sorry")
-		return
-	}
-
-	fmt.Fprintf(w, "hello! %s has %d players of %d max", s.Name, pong.Players.Online, pong.Players.Max)
+	log.Fatalln(http.ListenAndServe(":"+port, nil))
 }
