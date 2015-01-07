@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/gorilla/mux"
+	"github.com/andrewtian/minepong"
 	"log"
 	"net/http"
 )
@@ -16,8 +17,8 @@ func main() {
 }
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
-	s := NewServer("desrtia", "pvp.desteria.com:25565")
-	if err := s.connect(); err != nil {
+	s := minepong.NewServer("desrtia", "pvp.desteria.com:25565")
+	if err := s.Connect(); err != nil {
 		fmt.Fprintln(w, "couldnt connect to server")
 		return
 	}
@@ -28,5 +29,5 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Fprintf(w, "hello! %s has %d players of %d max", s.name, pong.Players.Online, pong.Players.Max)
+	fmt.Fprintf(w, "hello! %s has %d players of %d max", s.Name, pong.Players.Online, pong.Players.Max)
 }
