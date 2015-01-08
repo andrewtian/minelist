@@ -15,6 +15,7 @@ func init() {
 	templates["list.html"] = template.Must(template.ParseFiles("templates/list.tmpl", "templates/layout.tmpl"))
 	templates["lisdt.html"] = template.Must(template.ParseFiles("templates/list.tmpl", "templates/layout.tmpl"))
 	templates["about.html"] = template.Must(template.ParseFiles("templates/about.tmpl", "templates/layout.tmpl"))
+	templates["track.html"] = template.Must(template.ParseFiles("templates/track.tmpl", "templates/layout.tmpl"))
 }
 
 func main() {
@@ -22,6 +23,8 @@ func main() {
 	r.HandleFunc("/", ListHandler)
 	r.HandleFunc("/test", TestHandler)
 	r.HandleFunc("/about", AboutHandler)
+	r.HandleFunc("/track", NewTrackHandler).Methods("GET")
+	r.HandleFunc("/track", CreateTrackHandler).Methods("POST")
 
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	http.Handle("/", r)

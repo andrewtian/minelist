@@ -1,0 +1,14 @@
+{{ define "title"}}<title>Track a server</title>{{ end }}
+{{ define "content" }}
+    <h1>Track a server</h1>
+    <p>All servers must be manually approved before publicly listed; however, we will start tracking immediately</p>
+    {{ if .error }}
+    <div class="error">{{ .error }}</div>
+    {{ end }}
+    <form action="/track" method="post">
+        <input type="text" name="name" placeholder="#1 minecraft server"><br>
+        <input type="text" name="hostname" placeholder="example.com">
+        : <input type="text" name="port" placeholder="25556">
+        <button>Track</button>
+    </form>
+{{ end }}

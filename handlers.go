@@ -30,6 +30,37 @@ func ListHandler(w http.ResponseWriter, r *http.Request) {
 	templates["list.html"].ExecuteTemplate(w, "base", data)
 }
 
+func NewTrackHandler(w http.ResponseWriter, r *http.Request) {
+	templates["track.html"].ExecuteTemplate(w, "base", map[string]interface{}{})
+}
+
+func CreateTrackHandler(w http.ResponseWriter, r *http.Request) {
+	data := map[string]interface{}{}
+
+	if err := r.ParseForm(); err != nil {
+		templates["track.html"].ExecuteTemplate(w, "base", data)
+	}
+
+	name := r.Form.Get("name")
+	if !(len(name) <= 64 && len(name) > 0) {
+		data["error"] = "name must be between 0 and 65 characters"
+		templates["track.html"].ExecuteTemplate(w, "base", data)
+		return
+	}
+
+	host := r.Form.Get("hostname") + ":" + r.Form.Get("port")
+	svr := NewServer(name, host)
+	if err := svr.Ping(); err != nil {
+		data["error"] = "could not verify server. check hostname and port"
+		templates["track.html"].ExecuteTemplate(w, "base", data)
+		return
+	}
+
+	lm.AddServer(svr)
+
+	templates["track.html"].ExecuteTemplate(w, "base", data)
+}
+
 func AboutHandler(w http.ResponseWriter, r *http.Request) {
 	templates["about.html"].ExecuteTemplate(w, "base", map[string]interface{}{})
 }
