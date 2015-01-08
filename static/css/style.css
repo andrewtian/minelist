@@ -47,14 +47,23 @@ table {
     border-spacing: 0;
 }
 
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
 body {
     font-size: 13px;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', sans-serif;
     padding: 0 30px;
 }
 
 header {
     padding: 30px 0;
+    font-size: 15px;
 }
 
 header h1 {
@@ -63,13 +72,8 @@ header h1 {
 }
 
 header h1 a {
-    text-decoration: none;
     color: #000;
     font-weight: bold;
-}
-
-header h1 a:hover {
-    text-decoration: underline;
 }
 
 header nav {}
@@ -94,12 +98,26 @@ header nav a {
     line-height: 18px;
 }
 
-table th {
-    text-align: left;
-    padding: 5px;
+.table tr td:first-child, .table tr th:first-child {
+    padding-left: 0;
 }
 
-table td {
-    padding: 5px;
+.table tr td:last-child, .table tr th:last-child {
+    padding-right: 0;
+}
+
+.table th, .table td {
+    padding: 6px 10px;
+}
+
+.table th {
     text-align: left;
+    font-weight: bold;
+}
+
+.table tbody tr:hover {
+    background: #F2F2F2;
+}
+
+.table td {
 }

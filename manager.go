@@ -2,9 +2,10 @@ package main
 
 import (
 	"errors"
-	"fmt"
 	"github.com/andrewtian/minepong"
+	"github.com/dustin/go-humanize"
 	"net"
+	"strconv"
 	"time"
 )
 
@@ -76,6 +77,22 @@ func (s *Server) Latency() string {
 	}
 
 	return s.LastPing().latency.String()
+}
+
+func (s *Server) Players() string {
+	if s.LastPing() == nil {
+		return "n/a"
+	}
+
+	return strconv.Itoa(s.LastPing().Players.Online) + "/" + strconv.Itoa(s.LastPing().Players.Max)
+}
+
+func (s *Server) LastPingTime() string {
+	if s.LastPing() == nil {
+		return "n/a"
+	}
+
+	return humanize.Time(s.LastPing().time)
 }
 
 func (s *Server) Ping() error {

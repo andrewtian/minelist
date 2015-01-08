@@ -1,13 +1,14 @@
 {{ define "title"}}<title>Minecraft Servers</title>{{ end }}
 {{ define "content" }}
-<table>
+<table class="table">
     <thead>
         <tr>
             <th>#</th>
             <th>Name</th>
             <th>Host</th>
+            <th>Players</th>
             <th>Latency</th>
-            <th>Last Ping</th>
+            <th>Last ping time</th>
         </tr>
     </thead>
     <tbody>
@@ -16,11 +17,12 @@
         <td>{{ $key }}</td>
         <td>{{ $value.Name }}</td>
         <td>{{ $value.Host }}</td>
+        <td>{{ $value.Players }}</td>
         <td>
             {{ $value.Latency }}
         </td>
         <td>
-            
+            {{ $value.LastPingTime }}
         </td>
     </tr>
     {{ end }}
