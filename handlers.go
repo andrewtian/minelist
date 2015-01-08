@@ -7,13 +7,13 @@ import (
 )
 
 func TestHandler(w http.ResponseWriter, r *http.Request) {
-	s := minepong.NewServer("desrtia", "pvp.desteria.com:25565")
+	s := NewServer("desrtia", "pvp.desteria.com:25565")
 	if err := s.Connect(); err != nil {
 		fmt.Fprintln(w, "couldnt connect to server")
 		return
 	}
 
-	pong, err := s.Ping()
+	pong, err := minepong.Ping(s.Conn, s.Host)
 	if err != nil {
 		fmt.Println(w, "there was an error pinging sorry")
 		return
