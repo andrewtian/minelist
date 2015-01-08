@@ -23,7 +23,11 @@ func TestHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func ListHandler(w http.ResponseWriter, r *http.Request) {
-	templates["list.html"].ExecuteTemplate(w, "base", map[string]interface{}{})
+	data := map[string]interface{}{
+		"servers": lm.servers,
+	}
+
+	templates["list.html"].ExecuteTemplate(w, "base", data)
 }
 
 func AboutHandler(w http.ResponseWriter, r *http.Request) {

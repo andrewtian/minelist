@@ -93,3 +93,13 @@ header nav a {
     margin-bottom: 13px;
     line-height: 18px;
 }
+
+table th {
+    text-align: left;
+    padding: 5px;
+}
+
+table td {
+    padding: 5px;
+    text-align: left;
+}

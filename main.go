@@ -31,5 +31,18 @@ func main() {
 		port = "3000"
 	}
 
+	lm.AddServer(NewServer("asdf", "us.lichcraft.com:25565"))
+	lm.AddServer(NewServer("asdf", "mc.fearpvp.com:25565"))
+	lm.AddServer(NewServer("asdf", "pvp.originmc.org:25565"))
+	lm.AddServer(NewServer("asdf", "mc.fearpvp.com:25565"))
+	lm.AddServer(NewServer("asdf", "PvP.FadeFactions.com:25565"))
+	lm.AddServer(NewServer("asdf", "mc.fearpvp.com:25565"))
+	lm.AddServer(NewServer("asdf", "mc.fearpvp.com:25565"))
+	lm.AddServer(NewServer("asdf", "mc.fearpvp.com:25565"))
+	lm.AddServer(NewServer("asdf", "mc.fearpvp.com:25565"))
+	lm.AddServer(NewServer("asdf", "mc.fearpvp.com:25565"))
+
+	lm.Start()
+
 	log.Fatalln(http.ListenAndServe(":"+port, nil))
 }

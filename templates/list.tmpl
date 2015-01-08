@@ -1,4 +1,29 @@
 {{ define "title"}}<title>Minecraft Servers</title>{{ end }}
 {{ define "content" }}
-    testing
+<table>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Host</th>
+            <th>Latency</th>
+            <th>Last Ping</th>
+        </tr>
+    </thead>
+    <tbody>
+    {{ range $key, $value := .servers }}
+    <tr>
+        <td>{{ $key }}</td>
+        <td>{{ $value.Name }}</td>
+        <td>{{ $value.Host }}</td>
+        <td>
+            {{ $value.Latency }}
+        </td>
+        <td>
+            
+        </td>
+    </tr>
+    {{ end }}
+    </tbody>
+</table>
 {{ end }}

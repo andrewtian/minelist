@@ -2,6 +2,7 @@ package main
 
 import (
 	"errors"
+	"fmt"
 	"github.com/andrewtian/minepong"
 	"net"
 	"time"
@@ -10,8 +11,8 @@ import (
 type ServerStatus int
 
 const (
-	Active ServerStatus = iota + 1
-	Unknown
+	Active  ServerStatus = iota + 1 // 1
+	Unknown                         // 2
 )
 
 // the schedule of what to ping each server
@@ -57,6 +58,10 @@ func (s *Server) Connect() error {
 	return nil
 }
 
+func (s *Server) Disconnect() {
+	s.Conn.Close()
+}
+
 func (s *Server) LastPing() *Pong {
 	if len(s.PongHistory) > 0 {
 		return s.PongHistory[0]
@@ -65,8 +70,21 @@ func (s *Server) LastPing() *Pong {
 	return nil
 }
 
+func (s *Server) Latency() string {
+	if s.LastPing() == nil {
+		return "n/a"
+	}
+
+	return s.LastPing().latency.String()
+}
+
 func (s *Server) Ping() error {
 	ts := time.Now()
+
+	if err := s.Connect(); err != nil {
+		return err
+	}
+	defer s.Disconnect()
 
 	pong, err := minepong.Ping(s.Conn, s.Host)
 	if err != nil {
