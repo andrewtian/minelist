@@ -122,6 +122,12 @@ func (m *ListManager) PingType(typ ServerStatus) {
 
 		if err := s.Ping(); err != nil {
 			s.Status = Unknown
+			continue
+		}
+
+		// responded, set back to active status
+		if s.Status == Unknown {
+			s.Status = Active
 		}
 	}
 }
