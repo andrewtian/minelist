@@ -1,0 +1,27 @@
+{
+	"ImportPath": "github.com/andrewtian/minelist",
+	"GoVersion": "go1.4",
+	"Deps": [
+		{
+			"ImportPath": "github.com/andrewtian/minepong",
+			"Rev": "64a02cb96b42e552a640213a045caf62a444e138"
+		},
+		{
+			"ImportPath": "github.com/dustin/go-humanize",
+			"Rev": "145fabdb1ab757076a70a886d092a3af27f66f4c"
+		},
+		{
+			"ImportPath": "github.com/gorilla/context",
+			"Rev": "215affda49addc4c8ef7e2534915df2c8c35c6cd"
+		},
+		{
+			"ImportPath": "github.com/gorilla/mux",
+			"Rev": "e444e69cbd2e2e3e0749a2f3c717cec491552bbf"
+		},
+		{
+			"ImportPath": "github.com/lib/pq",
+			"Comment": "go1.0-cutoff-10-gc0cbb32",
+			"Rev": "c0cbb323331257e9e2f4bfc35f34b637863510ef"
+		}
+	]
+}
