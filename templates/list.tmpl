@@ -9,6 +9,7 @@
             <th>Players</th>
             <th>Latency</th>
             <th>Last ping time</th>
+            <th>Status</th>
         </tr>
     </thead>
     <tbody>
@@ -23,6 +24,9 @@
         </td>
         <td>
             {{ $value.LastPingTime }}
+        </td>
+        <td>
+            {{ $value.Status }}
         </td>
     </tr>
     {{ end }}
