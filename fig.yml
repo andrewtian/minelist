@@ -1,0 +1,11 @@
+web:
+  build: .
+  ports:
+    - "8080:3000"
+  entrypoint: "minelist"
+  links:
+    - db
+db:
+  image: postgres
+  ports:
+    - 5432
